@@ -1,0 +1,16 @@
+{
+  "TestServiceSASSettings": {
+    "accountName": "{YOUR_ACCOUNT_NAME}",
+    "accountKey": "{YOUR_ACCOUNT_KEY}"
+  },
+  "TestDelegationSASSettings": {
+    "accountName": "{YOUR_ACCOUNT_NAME}",
+    "RegisteredApplication": {
+      "appName": "{YOUR_APP_NAME}",
+      "appId": "{YOUR_APP_ID}",
+      "appSecret": "{YOUR_APP_SECRET}",
+      "appServicePrincipalOID": "{YOUR_APP_SERVICE_PRINCIPAL_OID}",
+      "appServicePrincipalTID": "{YOUR_APP_SERVICE_PRINCIPAL_TID}"
+    }
+  }
+}
