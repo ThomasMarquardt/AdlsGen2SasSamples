@@ -36,6 +36,58 @@ the aforementioned SAS generators.  These test classes are TestServiceSas and Te
 The test classes use the [ADLS Gen2 SDK for Java] [sdk-java] to invoke filesystem operations using
 the SAS tokens created by the two SAS generators included in this project.
 
+Before you can run the tests, you must register an app, assign it to roles so that
+it has the permissions to generate user delegation keys and fully control
+filesystems within a test storage account, and update the settings.json file with
+the test account name and credentials:
+
+    1) Register an app:
+      a) Login to https://portal.azure.com, select your AAD directory and search for app registrations.
+      b) Click "New registration".
+      c) Provide a display name, such as "sas-sample-app".
+      d) Set the account type to "Accounts in this organizational directory only ({YOUR_Tenant} only - Single tenant)".
+      e) For Redirect URI select Web and enter "http://localhost".
+      f) Click Register.
+
+    2)  Create necessary role assignments:
+      a) Login to https://portal.azure.com and find the Storage account with hierarchical namespace enabled
+         that you plan to run the tests against.
+      b) Select "Access Control (IAM)".
+      c) Select Role Assignments
+      d) Click Add and select "Add role assignments"
+      e) For Role and enter "Storage Blob Data Owner".
+      f) Under Select enter the name of the app you registered in step 1 and select it.
+      g) Click Save.
+      h) Repeat above steps to create a second role assignment for the app but this time for
+         the "Storage Blob Delegator" role.
+
+    3) Generate a new client secret for the application:
+      a) Login to https://portal.azure.com and find the app registered in step 1.
+      b) Select "Certificates and secrets".
+      c) Click "New client secret".
+      d) Enter a description (eg. Secret1)
+      e) Set expiration period.  Expires in 1 year is good.
+      f) Click Add
+      g) Copy the secret and expiration to a safe location.
+
+    4) Set the following configuration values in you local copy of src/test/resources/settings.json:
+        {
+          "TestServiceSASSettings": {
+            "accountName": "{YOUR_ACCOUNT_NAME}",
+            "accountKey": "{YOUR_ACCOUNT_KEY}"
+          },
+          "TestDelegationSASSettings": {
+            "accountName": "{YOUR_ACCOUNT_NAME}",
+            "RegisteredApplication": {
+              "appName": "{YOUR_APP_NAME}",
+              "appId": "{YOUR_APP_ID}",
+              "appSecret": "{YOUR_APP_SECRET}",
+              "appServicePrincipalOID": "{YOUR_APP_SERVICE_PRINCIPAL_OID}",
+              "appServicePrincipalTID": "{YOUR_APP_SERVICE_PRINCIPAL_TID}"
+            }
+          }
+        }
+
 The easiest way to run and debug the test cases is with [IntelliJ] [idea].  Simply clone the
 sample code repository and then load the pom.xml file in IntelliJ.
 
