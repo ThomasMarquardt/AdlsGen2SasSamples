@@ -12,7 +12,7 @@ Azure Data Lake Storage Gen2 (ADLS Gen2) is previewing updates to Shared Access 
   safer for the purpose of distributing across a multi-user cluster. One use case
   for these features is the integration of the Hadoop ABFS driver with Apache Ranger.
   
-This project includes [code samples] [samples] that show you how to use the new SAS features.
+This project includes [code samples](./src/test/java/com/azure/samples) that show you how to use the new SAS features.
 
 ## Getting started
 The ADSL Gen2 REST API supports the new features when using an authentication version
@@ -21,7 +21,7 @@ you do not need to update the REST version of your client, only the authenticati
 must be 2020-02-10 or higher.  The authentication version is specified by the sv query
 parameter of the SAS token.
 
-An [ADLS Gen2 SDK] [sdk] supporting the new features will not be available until
+An [ADLS Gen2 SDK](https://azure.microsoft.com/en-us/blog/filesystem-sdks-for-azure-data-lake-storage-gen2-now-generally-available/) supporting the new features will not be available until
 later this year, but the sample code in this project will help you get started without
 requiring you to work with the low-level REST APIs.
 
@@ -33,7 +33,7 @@ methods to generate SAS constrained to a specific filesystem operation and user.
 
 There are two test classes that provide examples of how to generate SAS tokens with
 the aforementioned SAS generators.  These test classes are TestServiceSas and TestDelegationSas.
-The test classes use the [ADLS Gen2 SDK for Java] [sdk-java] to invoke filesystem operations using
+The test classes use the [ADLS Gen2 SDK for Java](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-directory-file-acl-java) to invoke filesystem operations using
 the SAS tokens created by the two SAS generators included in this project.
 
 Before you can run the tests, you must register an app, assign it to roles so that
@@ -88,7 +88,7 @@ the test account name and credentials:
           }
         }
 
-The easiest way to run and debug the test cases is with [IntelliJ] [idea].  Simply clone the
+The easiest way to run and debug the test cases is with [IntelliJ](https://www.jetbrains.com/idea/).  Simply clone the
 sample code repository and then load the pom.xml file in IntelliJ.
 
 Alternatively you can build and run the tests using maven:
@@ -99,7 +99,7 @@ Alternatively you can build and run the tests using maven:
 ## Details on the ADLS Gen2 SAS Update
 The SAS updates are described below, but for context on how this relates to existing
 functionality of SAS please refer to [Shared 
-Access Signatures] [sas-docs].
+Access Signatures](https://docs.microsoft.com/en-us/rest/api/storageservices/delegate-access-with-shared-access-signature).
 
 1) Service and User Delegation SAS will support directory scope (sr=d) when 
 the authentication version (sv) is 2020-02-10 or higher and namespace is enabled. 
@@ -203,13 +203,4 @@ or higher has the following format:
                            rsct
 
 6) For Service SAS, the string-to-sign format for authentication version 2020-02-10 is unchanged,
-so please refer to [authentication version 2018-11-09 format] [service-sas-docs].
-
-<!-- LINKS -->
-[samples]: src/test/java/com/azure/samples
-[sas-docs]: https://docs.microsoft.com/en-us/rest/api/storageservices/delegate-access-with-shared-access-signature
-[sdk]: https://azure.microsoft.com/en-us/blog/filesystem-sdks-for-azure-data-lake-storage-gen2-now-generally-available/
-[sdk-java]: https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-directory-file-acl-java
-[idea]: https://www.jetbrains.com/idea/
-[service-sas-docs]: https://docs.microsoft.com/en-us/rest/api/storageservices/create-service-sas#version-2018-11-09-and-later
-
+so please refer to [authentication version 2018-11-09 format](https://docs.microsoft.com/en-us/rest/api/storageservices/create-service-sas#version-2018-11-09-and-later).
